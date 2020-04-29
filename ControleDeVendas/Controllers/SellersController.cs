@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ControleDeVendas.Models;
 using ControleDeVendas.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,14 @@ namespace ControleDeVendas.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Seller seller)
+        {
+            _sellerService.Insert(seller);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
